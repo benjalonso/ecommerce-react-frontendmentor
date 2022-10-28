@@ -1,51 +1,83 @@
+import { useRef, useState } from "react";
 import PreviousIcon from "@/components/icons/PreviousIcon";
 import NextIcon from "@/components/icons/NextIcon";
+import { useEffect } from "react";
 
-import imgProduct1 from "@/assets/images/image-product-1.jpg";
-import imgProduct2 from "@/assets/images/image-product-2.jpg";
-import imgProduct3 from "@/assets/images/image-product-3.jpg";
-import imgProduct4 from "@/assets/images/image-product-4.jpg";
+export const SliderProduct = ({
+  images = [],
+  imagesSmall = [],
+  isOpen = false,
+  handleClose = null,
+  ...props
+}) => {
+  const [index, setIndex] = useState(0);
+  const btnSlider = useRef(null);
 
-import imgProduct1Small from "@/assets/images/image-product-1-thumbnail.jpg";
-import imgProduct2Small from "@/assets/images/image-product-2-thumbnail.jpg";
-import imgProduct3Small from "@/assets/images/image-product-3-thumbnail.jpg";
-import imgProduct4Small from "@/assets/images/image-product-4-thumbnail.jpg";
-import { useState } from "react";
+  useEffect(() => {
+    isOpen && btnSlider.current.classList.remove("md:hidden");
+  });
 
-const images = [imgProduct1,imgProduct2,imgProduct3,imgProduct4]
+  const handleClickNext = () => {
+    if (index === images.length - 1) return setIndex(0);
+    setIndex(index + 1);
+  };
 
-export const SliderProduct = () => {
-
-  const [index, setIndex] = useState(0)
-
-  const handleClickNext = () => { 
-    if(index === images.length - 1) return setIndex(0)
-    setIndex(index+1)
-   }
   const handleClickPrev = () => {
-    if(index === 0) return setIndex(images.length-1)
-    setIndex(index-1)
-
-    }
-
+    if (index === 0) return setIndex(images.length - 1);
+    setIndex(index - 1);
+  };
 
   return (
-    <section className="grid md:grid-cols-4 md:gap-4">
+    <section {...props}>
+      {isOpen && (
+        <button onClick={handleClose} className="text-right md:col-span-4">
+          X
+        </button>
+      )}
       <div className="relative col-span-4">
-        <img src={images[index]} alt="" className="aspect-[16/12] w-full md:aspect-[16/18] md:rounded-md" />
-        <div className="absolute top-1/2 left-0 flex w-full -translate-y-1/2 justify-between px-4">
-          <button onClick={handleClickPrev} className="flex h-10 w-10 items-center justify-center rounded-full bg-white">
+        <img
+          src={images[index]}
+          alt=""
+          className="aspect-[16/12] w-full md:aspect-[16/18] md:rounded-md"
+        />
+        <div
+          ref={btnSlider}
+          className="absolute top-1/2 left-0 flex w-full -translate-y-1/2 justify-between px-4 md:hidden"
+        >
+          <button
+            onClick={handleClickPrev}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white"
+          >
             <PreviousIcon />
           </button>
-          <button onClick={handleClickNext} className="flex h-10 w-10 items-center justify-center rounded-full bg-white">
+          <button
+            onClick={handleClickNext}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white"
+          >
             <NextIcon />
           </button>
         </div>
       </div>
-      <img src={imgProduct1Small} alt="" className="hidden md:block md:rounded-md" />
-      <img src={imgProduct2Small} alt="" className="hidden md:block md:rounded-md" />
-      <img src={imgProduct3Small} alt="" className="hidden md:block md:rounded-md" />
-      <img src={imgProduct4Small} alt="" className="hidden md:block md:rounded-md" />
+      {imagesSmall.map((imgSmall, i) => (
+        <div
+          onClick={() => {
+            setIndex(i);
+          }}
+          className="relative overflow-hidden rounded-md"
+        >
+          <img
+            key={imgSmall}
+            src={imgSmall}
+            alt=""
+            className="hidden md:block md:rounded-md"
+          />
+          <span
+            className={` absolute top-0 h-full w-full hover:bg-[rgba(255,255,255,0.5)] ${
+              i === index && " border-2 border-[orange] bg-[rgba(255,255,255,0.5)]"
+            }`}
+          ></span>
+        </div>
+      ))}
     </section>
   );
 };
