@@ -14,7 +14,7 @@ const MainHeader = () => {
 
   const handleOpenMenu = () => {
     setActive(
-      "md: absolute top-0 left-0 flex h-full  w-4/5 flex-col gap-y-[21px] bg-white p-8 font-bold md:static md:mr-auto md:flex md:h-auto md:flex-row md:gap-4 md:p-0"
+      "md: absolute top-0 left-0 flex h-full  w-4/5 flex-col gap-y-[21px] bg-white p-8 font-bold md:static md:mr-auto md:flex md:h-auto md:flex-row md:gap-4 md:p-0 z-10"
     );
   };
   const handleCloseMenu = () => {
@@ -38,11 +38,11 @@ const MainHeader = () => {
           <button className="mb-12 md:hidden" onClick={handleCloseMenu}>
             <CloseIcon />
           </button>
-          <NavLink name={"Collections"}/>
-          <NavLink name={"Men"}/>
-          <NavLink name={"Women"}/>
-          <NavLink name={"About"}/>
-          <NavLink name={"Contact"}/>
+          <NavLink name={"Collections"} />
+          <NavLink name={"Men"} />
+          <NavLink name={"Women"} />
+          <NavLink name={"About"} />
+          <NavLink name={"Contact"} />
         </nav>
         <div className="flex gap-4">
           <button>

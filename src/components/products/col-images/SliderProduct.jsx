@@ -32,7 +32,7 @@ export const SliderProduct = () => {
   return (
     <section className="grid md:grid-cols-4 md:gap-4">
       <div className="relative col-span-4">
-        <img src={images[index]} alt="" className="aspect-[16/12]" />
+        <img src={images[index]} alt="" className="aspect-[16/12] w-full md:aspect-[16/18] md:rounded-md" />
         <div className="absolute top-1/2 left-0 flex w-full -translate-y-1/2 justify-between px-4">
           <button onClick={handleClickPrev} className="flex h-10 w-10 items-center justify-center rounded-full bg-white">
             <PreviousIcon />
@@ -42,10 +42,10 @@ export const SliderProduct = () => {
           </button>
         </div>
       </div>
-      <img src={imgProduct1Small} alt="" className="hidden md:block" />
-      <img src={imgProduct2Small} alt="" className="hidden md:block" />
-      <img src={imgProduct3Small} alt="" className="hidden md:block" />
-      <img src={imgProduct4Small} alt="" className="hidden md:block" />
+      <img src={imgProduct1Small} alt="" className="hidden md:block md:rounded-md" />
+      <img src={imgProduct2Small} alt="" className="hidden md:block md:rounded-md" />
+      <img src={imgProduct3Small} alt="" className="hidden md:block md:rounded-md" />
+      <img src={imgProduct4Small} alt="" className="hidden md:block md:rounded-md" />
     </section>
   );
 };
